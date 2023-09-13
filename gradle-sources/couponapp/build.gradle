@@ -1,0 +1,80 @@
+allprojects({
+    task printProjectName {
+        doLast(){
+            println project.name
+        }
+    } 
+})
+
+
+subprojects({
+    
+    version = '1.0'
+    group = 'com.zaghir.project.gradle'
+
+    apply plugin : 'application'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testImplementation 'junit:junit:4.13.2'
+    }
+
+    task printSubProjectName {
+        doLast(){
+            println project.name
+        }
+    } 
+
+})
+
+// add dependendies  services to web 
+project(':web'){
+    dependencies {
+        implementation project(':services')
+    }
+}
+
+project(':services'){
+    dependencies {
+        implementation project(':data')
+    }
+}
+
+project(':data'){
+    dependencies {
+        implementation project(':integration')
+    }
+}
+
+
+//import com.zaghir.project.gradle.MyAWSPlugin
+public class MyAWSPlugin implements Plugin<Project>{
+  public void apply(Project project){
+    project.task("copyToS3"){
+      doLast{
+        println "Copied to S3"
+      }
+    }
+
+    project.task("deployToEC2"){
+      doLast{
+        println "Application is up and running on AWS EC2"
+      }
+    }
+  }
+}
+
+
+
+apply plugin: MyAWSPlugin
+
+//test.finaliezedBy jacocoTestReport 
+//jacocoTestReport.dependsOn test
+
+deployToEC2.dependsOn copyToS3
+
+// to run 
+// gradle -q deployToEC2   -q = quick 

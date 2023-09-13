@@ -1,0 +1,69 @@
+
+// when we execute this command 
+// gradle compile 
+// 
+// gradle create task like that 
+// Task task = new compile
+// project.addTask (task)
+
+
+plugins {
+    // Apply the application plugin to add support for building a CLI application in Java.
+    id 'application'
+    id 'java'
+    // url=""
+}
+
+project.description="First Java project"
+project.version=1.0
+
+// custom properties
+project.ext.props1="1111"
+project.ext.props2="2222"
+
+repositories {
+    
+    println project.name
+    println project.description
+    println project.version
+    println project.group
+    println project.path
+    println project.buildDir
+    println project.projectDir
+    println project.property("props1")
+    println project.property("props2")
+
+
+    println("repositories")
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+
+    jcenter()
+
+    mavenLocal()
+}
+
+dependencies {
+    println("dependencies")
+    // Use JUnit test framework.
+    testImplementation 'junit:junit:4.13.2'
+
+    // This dependency is used by the application.
+    
+    //   scops     'groupId : artefactId : version'
+    implementation 'com.google.guava:guava:32.1.1-jre'
+}
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    println("java")
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+application {
+    println("application")
+    // Define the main class for the application.
+    mainClass = 'com.zaghir.project.gradle.App'
+}

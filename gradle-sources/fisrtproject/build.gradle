@@ -1,0 +1,30 @@
+
+task (firstTask) {
+    def abc = 123
+    println abc 
+    println 'Gradle firstTask'
+}
+
+task deployToStage {    
+    doLast(){
+        println 'Deploy to stage'
+    }    
+}
+
+task 
+ {
+    doLast(){
+        println 'Deploy to prod'
+    }    
+}
+
+task cleaupFiles {
+    doLast(){
+        println 'Cleanup Files'
+    }    
+}
+
+deployToProd.dependsOn(deployToStage)
+deployToProd.finalizedBy cleaupFiles
+
+defaultTasks = ["deployToStage"]
