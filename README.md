@@ -1,7 +1,7 @@
  # What is Gradle
  
  ![info!](images/001-what-is-gradle-01.png)
- ![info!](images/002-what-is-gradle-01.png)
+ ![info!](images/002-why-gradle-01.png)
  
  #installation 
  https://docs.gradle.org/current/userguide/installation.html
